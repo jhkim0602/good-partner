@@ -1,0 +1,78 @@
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import * as logic from './logic.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+interface WizardAnswers {
+  initProject: boolean;
+  projectSlug: string;
+  language: string;
+  adapters: string[];
+}
+
+export async function startWizard(): Promise<void> {
+  console.log(chalk.bold.blue('\n🚀 Welcome to Good Partner - The Ultimate AI Collaboration Protocol\n'));
+
+  // Define supported languages
+  const LANGUAGES: Record<string, string> = {
+    'Korean (한국어)': 'ko',
+    'English': 'en',
+    'Chinese (中文)': 'zh'
+  };
+
+  const answers = await inquirer.prompt<WizardAnswers>([
+    {
+      type: 'confirm',
+      name: 'initProject',
+      message: 'Do you want to initialize a new Good Partner project here?',
+      default: true
+    },
+    {
+      type: 'input',
+      name: 'projectSlug',
+      message: 'Enter Project Slug (e.g., P-0001__my-app):',
+      default: 'P-0001__new-project',
+      when: (ans) => ans.initProject,
+      validate: (input: string) => {
+        if (/^P-\d{4}__[a-z0-9]+(?:-[a-z0-9]+)*$/.test(input)) return true;
+        return 'Format must be P-xxxx__slug (lowercase, numbers, hyphens)';
+      }
+    },
+    {
+      type: 'list',
+      name: 'language',
+      message: 'Select Primary Language for Documentation:',
+      choices: Object.keys(LANGUAGES),
+      when: (ans) => ans.initProject
+    },
+    {
+      type: 'checkbox',
+      name: 'adapters',
+      message: 'Select AI Adapters to install:',
+      choices: ['Codex', 'Claude', 'Gemini'],
+      when: (ans) => ans.initProject
+    }
+  ]);
+
+  if (!answers.initProject) {
+    console.log(chalk.yellow('Initialization cancelled.'));
+    return;
+  }
+
+  const selectedLangCode = LANGUAGES[answers.language] || 'en';
+  console.log(chalk.green(`\nInitializing project: ${answers.projectSlug}`));
+  console.log(chalk.cyan(`Language set to: ${answers.language} (${selectedLangCode})`));
+
+  await logic.initProject(answers.projectSlug, selectedLangCode);
+
+  if (answers.adapters && answers.adapters.length > 0) {
+    console.log(chalk.cyan(`Installing Adapters: ${answers.adapters.join(', ')}`));
+    await logic.installAdapters(answers.adapters);
+  }
+
+  console.log(chalk.bold.green('\n✨ Good Partner Environment is Ready! ✨'));
+  console.log(chalk.white('Run usage command: '), chalk.yellow('npx good-partner help'));
+}

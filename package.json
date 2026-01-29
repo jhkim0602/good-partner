@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "The ultimate collaboration skill for AI and Humans. Enforce documentation-driven development.",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
-    "good-partner": "./bin/index.js"
+    "good-partner": "./dist/bin/index.js"
   },
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,5 +27,11 @@
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0",
     "inquirer": "^9.3.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^25.1.0",
+    "typescript": "^5.9.3"
   }
 }

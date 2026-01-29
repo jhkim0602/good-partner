@@ -2,3 +2,5 @@
 people:
   - id: u-owner
     name: Owner
+  - id: u-debuguser
+    name: DebugUser
