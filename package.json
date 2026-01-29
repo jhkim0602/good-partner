@@ -1,6 +1,6 @@
 {
   "name": "@junghwan030602/good-partner",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The ultimate collaboration skill for AI and Humans. Enforce documentation-driven development.",
   "type": "module",
   "main": "dist/index.js",
