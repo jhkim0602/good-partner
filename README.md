@@ -1,8 +1,11 @@
 # Good Partner (AI Collaboration Protocol)
 
-[![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner)](https://www.npmjs.com/package/@jhkim0602/good-partner)
+![Good Partner Banner](public/banner.png)
 
-**The Ultimate Collaboration Skill between Humans and AI.**
+[![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner)](https://www.npmjs.com/package/@jhkim0602/good-partner)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+
+**The Ultimate Collaboration Skill between Humans, AI, and Vibe Coders.**
 Enforce documentation-driven development, agile workflows, and perfect context sharing.
 
 ---
@@ -17,54 +20,82 @@ Enforce documentation-driven development, agile workflows, and perfect context s
 <a name="english"></a>
 ## 🇺🇸 English
 
-### Introduction
-Good Partner is an open-source protocol and CLI tool designed to standardize collaboration between human developers and AI agents (like Codex, Claude, Gemini). It enforces a strict "document-first" approach to ensure no context is lost.
+### What is Good Partner?
+Good Partner is not just a tool; it's a **protocol** that standardizes how Humans and AI (Vibe Coders) work together. By enforcing a strict folder structure and documentation rules, it ensures that **context is never lost**, even when switching between different AI models or human developers.
 
-### quick Start
+### Getting Started
 ```bash
-# Run the installation wizard
+# Run the interactive installation wizard
 npx @jhkim0602/good-partner init
 ```
 
-### Features
-- **Project Structure**: Automatically scaffolds a standardized folder structure (`projects/`, `work/`, `sessions/`).
-- **AI Adapters**: Installs "Skills" and "Rules" for Codex, Claude, and Gemini to ensure they follow the protocol.
-- **Language Enforcement**: Enforces documentation in your preferred language (EN/KR/CN).
+### 🚀 Agile Collaboration with AI
+Good Partner enables an Agile workflow where AI actively participates:
+
+1.  **Phase (Epic) Definition**: Humans define the high-level goals in `phases/`.
+2.  **Task Automation**: AI generates concrete work packets in `work/` based on the Phase documents.
+3.  **Implementation**: AI writes code while simultaneously updating the `work/` document to reflect progress.
+4.  **Handoff**: When an AI session ends or a human takes over, a `handoffs/` document is generated to summarize the state.
+
+### 📂 How AI Generates Structure
+The folder structure is designed to be **AI-readable and AI-writable**:
+
+- **`projects/`**: Root of all work. AI creates project folders here (e.g., `P-0001__my-app`).
+- **`work/T-xxxx__slug.md`**: AI creates these "Living Tasks". They contain the Todo list, progress, and technical notes.
+- **`sessions/`**: AI logs its own thought process here daily. This allows "Time Travel" debugging.
+- **`registry/`**: AI registers itself (`ai-codex`) and the human (`u-owner`) to track ownership.
 
 ---
 
 <a name="korean"></a>
 ## 🇰🇷 한국어 (Korean)
 
-### 소개
-Good Partner는 인간 개발자와 AI 에이전트 간의 협업을 위한 표준 프로토콜이자 CLI 도구입니다. "문서 우선(Document-First)" 원칙을 강제하여, AI와의 긴 호흡의 협업에서도 맥락이 유실되지 않도록 돕습니다.
+### Good Partner란 무엇인가요?
+Good Partner는 단순한 도구가 아닙니다. **인간과 AI(바이브 코더)가 완벽하게 협업하기 위한 규약(Protocol)**입니다. 엄격한 폴더 구조와 문서화 규칙을 통해, AI 모델이 바뀌거나 개발자가 바뀌어도 **맥락(Context)이 절대 유실되지 않도록** 보장합니다.
 
 ### 시작하기
 ```bash
-# 설치 마법사 실행 (대화형 설정을 통해 프로젝트 초기화 및 AI 연결)
+# 대화형 설치 마법사 실행 (프로젝트 설정, 언어 선택, AI 어댑터 설치)
 npx @jhkim0602/good-partner init
 ```
 
-### 주요 기능
-- **표준 폴더 구조**: 협업에 최적화된 폴더 구조(`projects/`, `work/`, `sessions/` 등)를 자동 생성합니다.
-- **AI 어댑터**: Codex, Claude, Gemini가 이 프로토콜을 이해하고 따르도록 설정 파일(Skill/Context)을 자동으로 설치합니다.
-- **언어 강제화**: 프로젝트 문서화 언어(한국어/영어/중국어)를 설정하고 이를 따르도록 유도합니다.
+### 🚀 AI와 함께하는 애자일(Agile) 협업
+Good Partner는 AI가 단순 코딩 머신이 아니라, **능동적인 팀원**으로 참여하는 애자일 워크플로우를 제공합니다:
+
+1.  **Phase (Epic) 정의**: 인간이 `phases/` 폴더에 큰 목표와 요구사항을 정의합니다.
+2.  **Task 자동화**: AI는 Phase 문서를 읽고, 구체적인 작업 단위인 `work/` 문서를 자동으로 생성합니다.
+3.  **구현 및 동기화**: AI가 코드를 작성함과 동시에, 자신의 작업 진행 상황(Task 문서)을 실시간으로 업데이트합니다.
+4.  **Handoff (인수인계)**: AI 작업 세션이 끝나거나 사람이 바톤을 이어받을 때, `handoffs/` 폴더에 요약 문서를 남깁니다.
+
+### 📂 폴더 구조와 AI의 역할
+이 프로젝트의 모든 폴더는 **AI가 이해하고 생성할 수 있도록** 설계되었습니다:
+
+- **`projects/`**: 작업의 중심입니다. AI가 `P-0001` 같은 고유 ID로 프로젝트 폴더를 생성합니다.
+- **`work/T-xxxx__slug.md`**: AI가 생성하는 **"살아있는 작업 문서"**입니다. 할 일 목록, 고민 과정, 해결책이 기록됩니다.
+- **`sessions/`**: AI가 자신의 사고 과정(Chain of Thought)을 일기처럼 남기는 곳입니다. "어제 AI가 왜 저렇게 짰지?"를 추적할 수 있습니다.
+- **`registry/`**: AI도 팀원으로서 `registry/people.yaml`에 등록됩니다. (예: `ai-codex`, `ai-claude`)
 
 ---
 
 <a name="chinese"></a>
 ## 🇨🇳 中文 (Chinese)
 
-### 介绍
-Good Partner 是一个旨在标准化人类开发者与 AI 代理（如 Codex, Claude, Gemini）之间协作的开源协议和 CLI 工具。它强制执行“文档优先”的方法，确保在协作过程中不会丢失上下文。
+### 什么是 Good Partner?
+Good Partner 不仅仅是一个工具，它是人类与 AI（Vibe Coders）协同工作的**协议**。通过强制执行严格的文件夹结构和文档规则，它确保即使在不同的 AI 模型或人类开发者之间切换，**上下文也能完美保留**。
 
 ### 快速开始
 ```bash
-# 运行安装向导
+# 运行交互式安装向导
 npx @jhkim0602/good-partner init
 ```
 
-### 功能特点
-- **项目结构**: 自动生成标准化的文件夹结构 (`projects/`, `work/`, `sessions/`)。
-- **AI 适配器**: 为 Codex, Claude 和 Gemini 安装“技能”和“规则”，确保它们遵守协议。
-- **语言强制**: 强制在文档中使用您偏好的语言（英语/韩语/中文）。
+### 🚀 与 AI 的敏捷协作
+1.  **定义阶段 (Phase)**: 人类在 `phases/` 中定义高层目标。
+2.  **任务自动化 (Task)**: AI 基于 Phase 文档自动生成具体的 `work/` 任务包。
+3.  **实现与同步**: AI 在编写代码的同时，实时更新任务文档。
+4.  **移交 (Handoff)**: 当 AI 会话结束或人类接手时，自动生成移交文档。
+
+### 📂 文件夹结构
+- **`projects/`**: 项目根目录。
+- **`work/`**: AI 生成的任务文档。
+- **`sessions/`**: AI 的思维日志。
