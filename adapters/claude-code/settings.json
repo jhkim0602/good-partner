@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionEnd": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node good-partner/scripts/gp-lint.js || true"
+          }
+        ]
+      }
+    ]
+  }
+}
