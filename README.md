@@ -17,11 +17,19 @@
 
 ## What is Good Partner?
 
-**Good Partner** is the definitive **Protocol & Skill Set** for standardizing collaboration between Human Developers and AI Agents (Vibe Coders).
+**Good Partner** is the definitive protocol for **Zero-Waste Collaboration** between Humans and AI.
 
-In the era of 2026, AI writes more code than humans. The problem is **Context Loss**. When you switch from ChatGPT to Claude, or when you come back to a project after a month, the "Why" and "How" are often lost.
+### 😣 The Problem: "Context Waste"
+AI writes great code, but collaboration is fundamentally broken:
+1.  **Amnesia**: Once a chat session ends, the context is gone. You have to explain everything again to the next AI.
+2.  **Review Hell**: Humans spend more time reviewing disparate AI code and re-explaining requirements than actually building.
+3.  **Fragmentation**: Context is scattered across ChatGPT, Claude, and IDE chat windows.
 
-Good Partner solves this by enforcing a **Documentation-First** agile workflow that both Humans and AI can understand and maintain.
+### 💡 The Solution
+Good Partner solves this by **anchoring context in the file system**.
+- **AI Manages Context**: AI doesn't just write code; it reads requirements and updates the **Kanban board** itself.
+- **Single Source of Truth**: Instead of explaining "what we are doing", you simply tell the AI: **"Read the Kanban."**
+- **Continuity**: Whether you come back tomorrow or next year, the `.good-partner` folder preserves the entire thought process.
 
 ## ✨ Key Features
 
