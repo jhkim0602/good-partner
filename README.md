@@ -25,11 +25,11 @@ Good Partner solves this by enforcing a **Documentation-First** agile workflow t
 
 ## ✨ Key Features
 
-- **📂 AI-Readable Structure**: Standardized folders (`projects/`, `work/`, `decisions/`) that LLMs can traverse easily.
-- **🚀 Agile Workflow Automation**: "Phase -> Task -> Code" flow is baked into the file system.
-- **🔌 Universal Skill Injection**: Inject this protocol into **Codex**, **Claude**, or **Gemini** with a single command.
-- **🗣️ Language Enforcement**: Enforce documentation in any language (English, Korean, Chinese) via `.good-partner-rc.json`.
-- **🛡️ Token Efficiency**: Optimized "Hub-and-Spoke" architecture prevents context window overflow.
+- **📂 Spec-Kit Structure**: All artifacts live in a clean **`good-partner/`** directory. No root clutter.
+- **📋 Kanban-Driven**: `good-partner/kanban.md` is the single source of truth for AI and Humans.
+- **🚀 Agile Workflow Automation**: "Spec -> Task -> Code" flow is enforced via the file system.
+- **🔌 Universal Skill Injection**: Inject this protocol into **Codex**, **Claude**, or **Gemini**.
+- **🗣️ Language Enforcement**: Enforce documentation in any language (English, Korean, Chinese).
 
 ## 📦 Installation
 
@@ -43,34 +43,25 @@ good-partner --version
 
 ## 🚀 Quick Start
 
-### 1. Initialize a Project (The Wizard)
-Navigate to your empty repository and run:
+### 1. Initialize a Project
 ```bash
 good-partner init
-# or without installing:
-npx @junghwan030602/good-partner init
 ```
+This simply creates a **`good-partner/`** folder in your repository.
+It includes a `kanban.md` board, `specs/` for requirements, and `work/` for active tasks.
 
-### 1. Initialize a Project (The Wizard)
-Navigate to your repository and run:
-```bash
-good-partner init
-# or without installing:
-npx @junghwan030602/good-partner init
-```
-
-The wizard will auto-detect your environment and ask:
-1.  **Structure**: Are you in a **Single Project** (current folder) or valid **Monorepo**?
-2.  **Language**: Select **Primary Documentation Language** (English, Korean, Chinese).
-3.  **Adapters**: Choose AI tools (Codex, Claude, etc.) to inject skills into.
-
-### 2. Join the Project
-Register yourself as a team member. (AI tools are considered "Skills", not team members).
+### 2. Register
 ```bash
 good-partner register "Junghwan"
 ```
+This adds you to `good-partner/team.yaml`.
 
-### 3. Prime Your AI
+### 3. How to Collaborate
+1.  **Check Kanban**: Open `good-partner/kanban.md`.
+2.  **Pick a Task**: Move an item to **IN PROGRESS**.
+3.  **Code & Log**: AI will automatically read your `specs/` and log progress in `logs/`.
+
+### 4. Prime Your AI
 If you are starting a chat session with an LLM (e.g., ChatGPT web interface):
 ```bash
 good-partner prompt

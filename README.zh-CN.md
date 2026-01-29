@@ -24,11 +24,11 @@ Good Partner 通过强制执行 **文档优先 (Documentation-First)** 的敏捷
 
 ## ✨ 核心特性
 
-- **📂 AI 易读结构**: 标准化的文件夹结构 (`projects/`, `work/`, `decisions/`)，便于 LLM 轻松遍历。
-- **🚀 敏捷流程自动化**: “阶段 (Phase) -> 任务 (Task) -> 代码 (Code)” 的流程已内置于文件系统中。
+- **📂 Spec-Kit 结构**: 所有文档都整洁地存放在 **`good-partner/`** 目录中。
+- **📋 看板 (Kanban) 驱动**: `good-partner/kanban.md` 是 AI 和人类协作的唯一真理来源。
+- **🚀 敏捷流程自动化**: 强制执行 “Spec -> Task -> Code” 的工作流。
 - **🔌 通用技能注入**: 一键将此协议注入 **Codex**, **Claude**, 或 **Gemini**。
-- **🗣️ 语言强制**: 通过 `.good-partner-rc.json` 强制使用特定语言（英语、韩语、中文）进行文档编写。
-- **🛡️ Token 效率**: 优化的 “Hub-and-Spoke” 架构，防止上下文窗口溢出。
+- **🗣️ 语言强制**: 强制使用特定语言（英语、韩语、中文）进行文档编写。
 
 ## 📦 安装
 
@@ -42,32 +42,23 @@ good-partner --version
 
 ## 🚀 快速开始
 
-### 1. 初始化项目 (交互式向导)
-在空仓库中运行：
+### 1. 初始化项目
 ```bash
 good-partner init
-# 或者无需安装直接运行:
-npx @junghwan030602/good-partner init
 ```
+这将在您的仓库中创建一个 **`good-partner/`** 文件夹。
+其中包含 `kanban.md` (看板), `specs/` (需求规格), 和 `work/` (任务)。
 
-### 1. 初始化项目 (向导)
-进入您的仓库目录并运行：
-```bash
-good-partner init
-# 或者无需安装直接运行:
-npx @junghwan030602/good-partner init
-```
-
-向导将自动检测您的环境并询问：
-1.  **结构选择**: 是 **单个项目** (当前文件夹) 还是 **Monorepo** (创建子项目)？
-2.  **语言选择**: 选择 **主要文档语言** (英语、韩语、中文)。
-3.  **适配器安装**: 选择要注入技能的 AI 工具 (Codex, Claude 等)。
-
-### 2. 加入项目 (Register)
-注册为团队成员。（AI 仅被视为“技能工具”，而非团队成员）。
+### 2. 注册
 ```bash
 good-partner register "Junghwan"
 ```
+将您自己添加到 `good-partner/team.yaml` 中。
+
+### 3. 如何协作
+1.  **检查看板**: 打开 `good-partner/kanban.md`。
+2.  **领取任务**: 将条目移动到 **IN PROGRESS**。
+3.  **编码与记录**: AI 将自动读取 `specs/` 并将进度记录在 `logs/` 中。
 
 ### 3. 预热 AI (Prompt)
 如果您在 ChatGPT 网页版等环境中开始新会话：

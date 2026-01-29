@@ -15,6 +15,9 @@ export async function initProject(projectSlug: string, langCode: string, isMonor
       projectRoot = path.join(root, 'projects', projectSlug);
   }
 
+  // Define the Good Partner Core Directory
+  const gpRoot = path.join(projectRoot, 'good-partner');
+
   const templateRoot = path.join(PKG_ROOT, 'templates', 'default');
 
   if (!fs.existsSync(templateRoot)) {
@@ -22,81 +25,132 @@ export async function initProject(projectSlug: string, langCode: string, isMonor
     return;
   }
 
-  console.log(chalk.blue(`Setting up structure in: ${projectRoot}`));
-  fs.ensureDirSync(projectRoot);
+  console.log(chalk.blue(`Initializing Good Partner structure in: ${gpRoot}`));
+  fs.ensureDirSync(gpRoot);
 
-  // 1. Copy Templates
-  const requiredDocs = ['overview.md', 'scope.md', 'roadmap.md', 'requirements.md'];
-  for (const doc of requiredDocs) {
+  // Define Sub-directories (Legacy flat -> Nested "Spec Kit" structure)
+  const dirs = [
+    'specs',        // Replaces decisions, requirements, scope, roadmap
+    'work',         // Active tasks
+    'logs',         // Sessions, Handoffs
+    'media',        // Uploads, Assets
+    'tests'         // QA results
+  ];
+
+  for (const dir of dirs) {
+    fs.ensureDirSync(path.join(gpRoot, dir));
+  }
+
+  // 1. Copy Templates to 'specs' (Converting old flat docs to specs)
+  const specDocs = ['overview.md', 'scope.md', 'roadmap.md', 'requirements.md'];
+  for (const doc of specDocs) {
     const src = path.join(templateRoot, doc);
-    const dest = path.join(projectRoot, doc);
+    const dest = path.join(gpRoot, 'specs', doc);
     if (!fs.existsSync(dest) && fs.existsSync(src)) {
       fs.copySync(src, dest);
     }
   }
 
-  // 2. Create INDEX.md
-  const indexPath = path.join(projectRoot, 'INDEX.md');
-  if (!fs.existsSync(indexPath)) {
-    const title = langCode === 'ko' ? '프로젝트 인덱스' : 'Project Index';
-    const content = `# ${projectSlug}\n\n${title}\n`;
-    fs.writeFileSync(indexPath, content);
+  // 2. Create KANBAN.md (Single Source of Truth)
+  const kanbanPath = path.join(gpRoot, 'kanban.md');
+  if (!fs.existsSync(kanbanPath)) {
+    const title = langCode === 'ko' ? '칸반 보드 (Kanban Board)' : 'Kanban Board';
+    const content = `# ${title}
+
+## 📋 TODO (Backlog)
+- [ ] Initial System Setup
+- [ ] define specs/requirements.md
+
+## 🏃 IN PROGRESS
+- [ ] Project Initialization (You are here)
+
+## ✅ DONE
+- [x] good-partner init
+`;
+    fs.writeFileSync(kanbanPath, content);
   }
 
-  // 3. Create Standard Directories
-  const dirs = [
-    'decisions', 'research', 'ownership', 'phases', 'features',
-    'work', 'sessions', 'handoffs', 'uploads', 'qa/results'
-  ];
-  for (const dir of dirs) {
-    fs.ensureDirSync(path.join(projectRoot, dir));
-  }
-
-  // 4. Copy QA Checklist & Indexes
-  const checklist = path.join(projectRoot, 'qa', 'checklist.md');
-  if (!fs.existsSync(checklist)) fs.copySync(path.join(templateRoot, 'checklist.md'), checklist);
-
-  const phaseIndex = path.join(projectRoot, 'phases', 'INDEX.md');
-  if (!fs.existsSync(phaseIndex)) fs.copySync(path.join(templateRoot, 'phase-index.md'), phaseIndex);
-
-  const featureIndex = path.join(projectRoot, 'features', 'INDEX.md');
-  if (!fs.existsSync(featureIndex)) fs.copySync(path.join(templateRoot, 'feature-index.md'), featureIndex);
-
-  // 5. Register Project
-  // If Monorepo, register in root/registry/projects.yaml
-  // If Single, maybe we don't need a registry or just put it in root/registry/projects.yaml
-  await registerProject(root, projectSlug);
-
-  // 6. Language Enforcement Config (Always at actual root)
-  const configPath = path.join(root, '.good-partner-rc.json');
-  const config = { language: langCode, type: isMonorepo ? 'monorepo' : 'single' };
+  // 3. Create CONFIG (Metadata)
+  const configPath = path.join(gpRoot, 'config.json');
+  const config = {
+      version: "1.1.0",
+      projectSlug,
+      language: langCode,
+      type: isMonorepo ? 'monorepo' : 'single',
+      structure: 'good-partner-v1'
+  };
   fs.writeJsonSync(configPath, config, { spaces: 2 });
 
-  console.log(chalk.green(`✓ Project initialized.`));
+  // 4. Create Team Registry (team.yaml)
+  await registerProject(gpRoot, projectSlug); // Actually creating team.yaml here essentially
+
+  // 5. Create AGENTS.md (The Map)
+  createAgentsMap(gpRoot, langCode);
+
+  // 6. Copy Templates Checklists
+  const checklist = path.join(gpRoot, 'tests', 'checklist.md');
+  if (!fs.existsSync(checklist)) fs.copySync(path.join(templateRoot, 'checklist.md'), checklist);
+
+  console.log(chalk.green(`✓ Project structure created at: good-partner/`));
 }
 
 /**
- * Register project in registry/projects.yaml
+ * Register project/team in team.yaml (formerly registry/projects.yaml)
  */
-async function registerProject(root: string, projectSlug: string): Promise<void> {
-  const registryPath = path.join(root, 'registry', 'projects.yaml');
-  fs.ensureDirSync(path.dirname(registryPath));
+async function registerProject(gpRoot: string, projectSlug: string): Promise<void> {
+  const teamPath = path.join(gpRoot, 'team.yaml');
 
   let content = '';
-  if (fs.existsSync(registryPath)) {
-    content = fs.readFileSync(registryPath, 'utf8');
+  if (fs.existsSync(teamPath)) {
+    content = fs.readFileSync(teamPath, 'utf8');
   } else {
-    content = 'projects:\n';
+    content = `# Good Partner Team Registry
+project_id: ${projectSlug}
+updated_at: ${new Date().toISOString()}
+
+members:
+`;
   }
 
-  if (!content.includes(projectSlug)) {
-    content += `  - id: ${projectSlug}\n`;
-    fs.writeFileSync(registryPath, content);
+  if (!fs.existsSync(teamPath)) {
+      fs.writeFileSync(teamPath, content);
   }
 }
 
 /**
- * Install AI Adapters
+ * Create AGENTS.md with specific path instructions
+ */
+function createAgentsMap(gpRoot: string, langCode: string) {
+    const agentsPath = path.join(gpRoot, 'AGENTS.md');
+    const content = `# AGENTS HANDBOOK
+
+**PROTOCOL VERSION**: 1.1.0 (Spec Kit)
+**LANGUAGE**: ${langCode}
+
+## 📂 DIRECTORY MAP
+AI Agents must strictly follow this directory structure:
+
+| Directory | Purpose |
+| :--- | :--- |
+| \`kanban.md\` | **READ FIRST**. The Single Source of Truth for current status. |
+| \`specs/\` | Requirements, Roadmap, Decisions. All "Truth" lives here. |
+| \`work/\` | Active Task Tickets (T-xxxx). Update these as you work. |
+| \`logs/\` | Session logs, Thinking process, Handoffs. |
+| \`team.yaml\` | List of human teammates (and AI tools). |
+| \`tests/\` | QA Checklists and Test Results. |
+
+## 🤖 BEHAVIOR RULES
+1. **Always Check Kanban**: Before writing code, check \`kanban.md\` to see what is "IN PROGRESS".
+2. **Spec First**: Do not guess requirements. Read \`specs/\` files.
+3. **Log Everything**: If you stop, write a log in \`logs/\`.
+
+`;
+    fs.writeFileSync(agentsPath, content);
+}
+
+
+/**
+ * Install AI Adapters (No major changes, just ensure they copy correctly)
  */
 export async function installAdapters(adapters: string[]): Promise<void> {
   const userRoot = process.cwd();
@@ -114,15 +168,12 @@ export async function installAdapters(adapters: string[]): Promise<void> {
     const srcBase = path.join(PKG_ROOT, 'adapters', 'claude-code');
     const destBase = path.join(userRoot, '.claude');
 
-    // Copy Files
     if (fs.existsSync(path.join(srcBase, 'settings.json'))) {
       fs.copySync(path.join(srcBase, 'settings.json'), path.join(destBase, 'settings.json'));
     }
-    // Copy CLAUDE.md to Root
     if (fs.existsSync(path.join(srcBase, 'CLAUDE.md'))) {
       fs.copySync(path.join(srcBase, 'CLAUDE.md'), path.join(userRoot, 'CLAUDE.md'));
     }
-     // Copy commands
     if (fs.existsSync(path.join(srcBase, 'commands'))) {
       fs.copySync(path.join(srcBase, 'commands'), path.join(destBase, 'commands'));
     }

@@ -5,33 +5,26 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = path.resolve(__dirname, '../../');
 /**
- * Register a person or AI in registry/people.yaml
+ * Register a person in registry/people.yaml
  */
-export async function register(name, role) {
+export async function register(name, role = 'human') {
     const root = process.cwd();
     const registryPath = path.join(root, 'registry', 'people.yaml');
     if (!fs.existsSync(registryPath)) {
-        console.error(chalk.red('Error: registry/people.yaml not found. Are you in a Good Partner project root?'));
+        console.error(chalk.red('Error: registry/people.yaml not found. Run "good-partner init" first.'));
         return;
     }
     const content = fs.readFileSync(registryPath, 'utf8');
-    // Simple check to avoid duplicates (could be robust with yaml parser)
     if (content.includes(`name: ${name}`)) {
-        console.log(chalk.yellow(`User ${name} already seems to be registered.`));
+        console.log(chalk.yellow(`User ${name} is already registered.`));
         return;
     }
-    // Determine ID prefix
-    let idPrefix = 'u';
-    if (role.toLowerCase() === 'ai')
-        idPrefix = 'ai';
-    else if (role.toLowerCase() === 'bot')
-        idPrefix = 'bot';
-    // Generate ID (simple random or based on name slug)
+    // Generate ID: u-name
     const slug = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    const id = `${idPrefix}-${slug}`;
-    const newEntry = `  - id: ${id}\n    name: ${name}\n`;
+    const id = `u-${slug}`;
+    const newEntry = `  - id: ${id}\n    name: ${name}\n    role: ${role}\n`;
     await fs.appendFile(registryPath, newEntry);
-    console.log(chalk.green(`✓ Registered ${name} (${id}) as ${role}`));
+    console.log(chalk.green(`✓ Registered ${name} (${id})`));
 }
 /**
  * Generate System Prompt
