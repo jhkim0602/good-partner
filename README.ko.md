@@ -4,7 +4,7 @@
 
 ![Good Partner Banner](public/banner.png)
 
-[![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@jhkim0602/good-partner)
+[![NPM Version](https://img.shields.io/npm/v/@junghwan030602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@junghwan030602/good-partner)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![AI Ready](https://img.shields.io/badge/AI-Ready-green?style=flat-square)](AGENTS.md)
 
@@ -34,7 +34,7 @@ Good Partner는 인간과 AI 모두가 이해하고 유지할 수 있는 **문�
 
 ```bash
 # 글로벌 설치 (추천)
-npm install -g @jhkim0602/good-partner
+npm install -g @junghwan030602/good-partner
 
 # 설치 확인
 good-partner --version
@@ -42,18 +42,31 @@ good-partner --version
 
 ## 🚀 빠른 시작
 
-### 1. 프로젝트 초기화 (Init)
+### 1. 프로젝트 초기화 (대화형 마법사)
 빈 레포지토리에서 다음 명령어를 실행하세요:
 ```bash
 good-partner init
+# 또는 설치 없이 바로 실행:
+npx @junghwan030602/good-partner init
 ```
-*대화형 마법사가 설정, 언어 선택, AI 어댑터 설치를 도와드립니다.*
 
-### 2. 팀원 등록 (Register)
-이 프로젝트에 참여하는 사람과 AI를 등록하세요.
+### 1. 프로젝트 초기화 (마법사 실행)
+레포지토리 폴더로 이동하여 실행하세요:
 ```bash
-good-partner register "Human-Lead" --role human
-good-partner register "GPT-4o" --role ai
+good-partner init
+# 또는 설치 없이 바로 실행:
+npx @junghwan030602/good-partner init
+```
+
+마법사가 현재 환경을 감지하고 다음을 설정합니다:
+1.  **구조 선택**: **단일 프로젝트**(현재 폴더에 적용)인지 **모노레포**(하위 프로젝트 생성)인지 선택합니다.
+2.  **언어 선택**: 문서화에 사용할 **공용어**(한국어, 영어, 중국어)를 결정합니다.
+3.  **어댑터 설치**: 사용 중인 AI 도구(Codex, Claude 등)에 스킬을 주입합니다.
+
+### 2. 프로젝트 참여하기 (Register)
+자신을 팀원으로 등록하세요. (AI는 도구(Skill)일 뿐, 팀원이 아닙니다.)
+```bash
+good-partner register "Junghwan"
 ```
 
 ### 3. AI 준비 시키기 (Prompt)

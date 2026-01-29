@@ -4,11 +4,17 @@ import chalk from 'chalk';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PKG_ROOT = path.resolve(__dirname, '../../'); // Adjusted for src/lib/ -> root
+const PKG_ROOT = path.resolve(__dirname, '../../');
 
-export async function initProject(projectSlug: string, langCode: string): Promise<void> {
+export async function initProject(projectSlug: string, langCode: string, isMonorepo: boolean = false): Promise<void> {
   const root = process.cwd();
-  const projectRoot = path.join(root, 'projects', projectSlug);
+
+  // Determine where the "Project Root" is
+  let projectRoot = root;
+  if (isMonorepo) {
+      projectRoot = path.join(root, 'projects', projectSlug);
+  }
+
   const templateRoot = path.join(PKG_ROOT, 'templates', 'default');
 
   if (!fs.existsSync(templateRoot)) {
@@ -16,7 +22,7 @@ export async function initProject(projectSlug: string, langCode: string): Promis
     return;
   }
 
-  console.log(chalk.blue(`Creating project structure in: ${projectRoot}`));
+  console.log(chalk.blue(`Setting up structure in: ${projectRoot}`));
   fs.ensureDirSync(projectRoot);
 
   // 1. Copy Templates
@@ -57,15 +63,16 @@ export async function initProject(projectSlug: string, langCode: string): Promis
   if (!fs.existsSync(featureIndex)) fs.copySync(path.join(templateRoot, 'feature-index.md'), featureIndex);
 
   // 5. Register Project
+  // If Monorepo, register in root/registry/projects.yaml
+  // If Single, maybe we don't need a registry or just put it in root/registry/projects.yaml
   await registerProject(root, projectSlug);
 
-  // 6. Language Enforcement Config
+  // 6. Language Enforcement Config (Always at actual root)
   const configPath = path.join(root, '.good-partner-rc.json');
-  const config = { language: langCode };
+  const config = { language: langCode, type: isMonorepo ? 'monorepo' : 'single' };
   fs.writeJsonSync(configPath, config, { spaces: 2 });
 
-  console.log(chalk.green(`✓ Project ${projectSlug} initialized.`));
-  console.log(chalk.green(`✓ Language set to: ${langCode}`));
+  console.log(chalk.green(`✓ Project initialized.`));
 }
 
 /**
@@ -85,7 +92,6 @@ async function registerProject(root: string, projectSlug: string): Promise<void>
   if (!content.includes(projectSlug)) {
     content += `  - id: ${projectSlug}\n`;
     fs.writeFileSync(registryPath, content);
-    console.log(chalk.gray(`Registered ${projectSlug} in registry.`));
   }
 }
 

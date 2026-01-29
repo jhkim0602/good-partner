@@ -27,8 +27,8 @@ program
 // Register
 program
   .command('register <name>')
-  .description('Register a new person or AI (e.g., "good-partner register GPT-4 --role ai")')
-  .option('-r, --role <role>', 'Role: human, ai, bot', 'human')
+  .description('Register a team member (e.g., "good-partner register Junghwan")')
+  .option('-r, --role <role>', 'Role', 'human')
   .action(async (name, options) => {
     await commands.register(name, options.role);
   });

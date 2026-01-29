@@ -4,7 +4,7 @@
 
 ![Good Partner Banner](public/banner.png)
 
-[![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@jhkim0602/good-partner)
+[![NPM Version](https://img.shields.io/npm/v/@junghwan030602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@junghwan030602/good-partner)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)](http://www.typescriptlang.org/)
 [![AI Ready](https://img.shields.io/badge/AI-Ready-green?style=flat-square)](AGENTS.md)
@@ -35,7 +35,7 @@ Good Partner solves this by enforcing a **Documentation-First** agile workflow t
 
 ```bash
 # Global install (recommended for daily use)
-npm install -g @jhkim0602/good-partner
+npm install -g @junghwan030602/good-partner
 
 # Verify installation
 good-partner --version
@@ -43,18 +43,31 @@ good-partner --version
 
 ## 🚀 Quick Start
 
-### 1. Initialize a Project
+### 1. Initialize a Project (The Wizard)
 Navigate to your empty repository and run:
 ```bash
 good-partner init
+# or without installing:
+npx @junghwan030602/good-partner init
 ```
-*The interactive wizard will guide you through setup, language selection, and AI adapter installation.*
 
-### 2. Register Your Team
-Tell the system who is working on this project (Humans and AIs).
+### 1. Initialize a Project (The Wizard)
+Navigate to your repository and run:
 ```bash
-good-partner register "Human-Lead" --role human
-good-partner register "GPT-4o" --role ai
+good-partner init
+# or without installing:
+npx @junghwan030602/good-partner init
+```
+
+The wizard will auto-detect your environment and ask:
+1.  **Structure**: Are you in a **Single Project** (current folder) or valid **Monorepo**?
+2.  **Language**: Select **Primary Documentation Language** (English, Korean, Chinese).
+3.  **Adapters**: Choose AI tools (Codex, Claude, etc.) to inject skills into.
+
+### 2. Join the Project
+Register yourself as a team member. (AI tools are considered "Skills", not team members).
+```bash
+good-partner register "Junghwan"
 ```
 
 ### 3. Prime Your AI

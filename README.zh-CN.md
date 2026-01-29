@@ -4,7 +4,7 @@
 
 ![Good Partner Banner](public/banner.png)
 
-[![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@jhkim0602/good-partner)
+[![NPM Version](https://img.shields.io/npm/v/@junghwan030602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@junghwan030602/good-partner)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![AI Ready](https://img.shields.io/badge/AI-Ready-green?style=flat-square)](AGENTS.md)
 
@@ -34,7 +34,7 @@ Good Partner 通过强制执行 **文档优先 (Documentation-First)** 的敏捷
 
 ```bash
 # 全局安装 (推荐)
-npm install -g @jhkim0602/good-partner
+npm install -g @junghwan030602/good-partner
 
 # 验证安装
 good-partner --version
@@ -42,18 +42,31 @@ good-partner --version
 
 ## 🚀 快速开始
 
-### 1. 初始化项目 (Init)
+### 1. 初始化项目 (交互式向导)
 在空仓库中运行：
 ```bash
 good-partner init
+# 或者无需安装直接运行:
+npx @junghwan030602/good-partner init
 ```
-*交互式向导将引导您完成设置、语言选择和 AI 适配器安装。*
 
-### 2. 注册团队 (Register)
-告诉系统谁在参与此项目（人类和 AI）。
+### 1. 初始化项目 (向导)
+进入您的仓库目录并运行：
 ```bash
-good-partner register "Human-Lead" --role human
-good-partner register "GPT-4o" --role ai
+good-partner init
+# 或者无需安装直接运行:
+npx @junghwan030602/good-partner init
+```
+
+向导将自动检测您的环境并询问：
+1.  **结构选择**: 是 **单个项目** (当前文件夹) 还是 **Monorepo** (创建子项目)？
+2.  **语言选择**: 选择 **主要文档语言** (英语、韩语、中文)。
+3.  **适配器安装**: 选择要注入技能的 AI 工具 (Codex, Claude 等)。
+
+### 2. 加入项目 (Register)
+注册为团队成员。（AI 仅被视为“技能工具”，而非团队成员）。
+```bash
+good-partner register "Junghwan"
 ```
 
 ### 3. 预热 AI (Prompt)
