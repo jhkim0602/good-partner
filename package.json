@@ -1,0 +1,29 @@
+{
+  "name": "@jhkim0602/good-partner",
+  "version": "1.0.0",
+  "description": "The ultimate collaboration skill for AI and Humans. Enforce documentation-driven development.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "good-partner": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "collaboration",
+    "protocol",
+    "codex",
+    "claude",
+    "gemini"
+  ],
+  "author": "jhkim0602",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.3.2"
+  }
+}
