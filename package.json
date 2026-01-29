@@ -21,7 +21,7 @@
     "gemini"
   ],
   "author": "jhkim0602",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^12.1.0",

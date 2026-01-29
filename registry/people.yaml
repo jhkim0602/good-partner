@@ -4,3 +4,5 @@ people:
     name: Owner
   - id: u-debuguser
     name: DebugUser
+  - id: ai-codex
+    name: Codex

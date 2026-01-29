@@ -5,7 +5,7 @@
 ![Good Partner Banner](public/banner.png)
 
 [![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@jhkim0602/good-partner)
-[![License: ISC](https://img.shields.io/badge/License-ISC-grey.svg?style=flat-square)](https://opensource.org/licenses/ISC)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%23007ACC.svg?style=flat-square&logo=typescript&logoColor=white)](http://www.typescriptlang.org/)
 [![AI Ready](https://img.shields.io/badge/AI-Ready-green?style=flat-square)](AGENTS.md)
 
@@ -86,4 +86,4 @@ We welcome contributions! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for de
 
 ## 📄 License
 
-This project is licensed under the ISC License.
+This project is licensed under the MIT License.

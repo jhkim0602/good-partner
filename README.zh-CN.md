@@ -5,7 +5,7 @@
 ![Good Partner Banner](public/banner.png)
 
 [![NPM Version](https://img.shields.io/npm/v/@jhkim0602/good-partner?style=flat-square&color=blue)](https://www.npmjs.com/package/@jhkim0602/good-partner)
-[![License: ISC](https://img.shields.io/badge/License-ISC-grey.svg?style=flat-square)](https://opensource.org/licenses/ISC)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![AI Ready](https://img.shields.io/badge/AI-Ready-green?style=flat-square)](AGENTS.md)
 
 [English](./README.md) | [한국어 (Korean)](./README.ko.md) | [中文 (Chinese)](./README.zh-CN.md)
@@ -85,4 +85,4 @@ good-partner skill claude
 
 ## 📄 许可证
 
-本项目采用 ISC 许可证。
+本项目采用 MIT 许可证。
