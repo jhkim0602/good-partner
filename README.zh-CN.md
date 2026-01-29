@@ -24,8 +24,8 @@ Good Partner 通过强制执行 **文档优先 (Documentation-First)** 的敏捷
 
 ## ✨ 核心特性
 
-- **📂 Spec-Kit 结构**: 所有文档都整洁地存放在 **`good-partner/`** 目录中。
-- **📋 看板 (Kanban) 驱动**: `good-partner/kanban.md` 是 AI 和人类协作的唯一真理来源。
+- **📂 简洁且强大**: 所有文件都安全地存储在 **`.good-partner/`** (隐藏文件夹) 中。
+- **📋 看板 (Kanban) 驱动**: `.good-partner/kanban.md` 是 AI 和人类协作的唯一真理来源。
 - **🚀 敏捷流程自动化**: 强制执行 “Spec -> Task -> Code” 的工作流。
 - **🔌 通用技能注入**: 一键将此协议注入 **Codex**, **Claude**, 或 **Gemini**。
 - **🗣️ 语言强制**: 强制使用特定语言（英语、韩语、中文）进行文档编写。
@@ -40,25 +40,41 @@ npm install -g @junghwan030602/good-partner
 good-partner --version
 ```
 
+## 🤝 协作哲学："人类指挥，AI 干活"
+
+在 Good Partner 中，角色划分非常严格：
+
+### 🧑‍💻 人类 (经理)
+- **只读 (Read-Only)**: 通常只需查看 `.good-partner/kanban.md` 确认进度。
+- **指引**: 定义目标，审批 AI 的工作。
+- **合并**: 接受并合并 AI 提交的 Pull Request。
+
+### 🤖 AI (工人)
+- **读写 (Read-Write)**: `.good-partner/` 文件夹是 AI 的领地。
+- **自动文档**: AI **自动** 创建任务、更新看板和记录日志。
+- **冲突解决**: 在合并分支时，AI 会智能地解决文档冲突。
+
 ## 🚀 快速开始
 
-### 1. 初始化项目
+### 1. 初始化
 ```bash
 good-partner init
 ```
-这将在您的仓库中创建一个 **`good-partner/`** 文件夹。
-其中包含 `kanban.md` (看板), `specs/` (需求规格), 和 `work/` (任务)。
+创建由 AI 管理的 `.good-partner` 隐藏工作区。
 
 ### 2. 注册
 ```bash
 good-partner register "Junghwan"
 ```
-将您自己添加到 `good-partner/team.yaml` 中。
 
-### 3. 如何协作
-1.  **检查看板**: 打开 `good-partner/kanban.md`。
-2.  **领取任务**: 将条目移动到 **IN PROGRESS**。
-3.  **编码与记录**: AI 将自动读取 `specs/` 并将进度记录在 `logs/` 中。
+### 3. 让 AI 开始工作
+只需对您的 AI (Cursor/Claude) 下达高层指令：
+> "检查看板并开始下一个功能。"
+
+AI 将会：
+1.  读取 `.good-partner/kanban.md`。
+2.  将任务移动到 **进行中 (IN PROGRESS)**。
+3.  同步进行编码和文档更新。
 
 ### 3. 预热 AI (Prompt)
 如果您在 ChatGPT 网页版等环境中开始新会话：

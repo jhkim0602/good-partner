@@ -24,8 +24,8 @@ Good Partner는 인간과 AI 모두가 이해하고 유지할 수 있는 **문�
 
 ## ✨ 주요 기능
 
-- **📂 스펙 키트(Spec-Kit) 구조**: 모든 문서는 **`good-partner/`** 폴더 한 곳에서 깔끔하게 관리됩니다.
-- **📋 칸반(Kanban) 중심**: `good-partner/kanban.md` 파일 하나로 프로젝트 전체 현황을 파악합니다.
+- **📂 심플 & 파워풀**: 모든 파일은 **`.good-partner/`** (숨김 폴더)에 안전하게 보관됩니다.
+- **📋 칸반(Kanban) 중심**: `.good-partner/kanban.md` 파일 하나로 프로젝트 전체 현황을 파악합니다.
 - **🚀 애자일 자동화**: "스펙(Spec) -> 태스크(Task) -> 코드(Code)"로 이어지는 흐름을 강제합니다.
 - **🔌 범용 스킬 주입**: 명령어 한 줄로 **Codex**, **Claude**, **Gemini**에 이 프로토콜을 주입할 수 있습니다.
 - **🗣️ 언어 강제화**: 한국어, 영어, 중국어 중 원하는 언어로만 문서화하도록 강제할 수 있습니다.
@@ -40,25 +40,41 @@ npm install -g @junghwan030602/good-partner
 good-partner --version
 ```
 
+## 🤝 협업 철학: "사람은 지휘하고, AI는 일한다"
+
+Good Partner에서는 역할이 철저히 구분됩니다.
+
+### 🧑‍💻 사람 (The Manager)
+- **읽기 전용 (Read-Only)**: 평소에는 `.good-partner/kanban.md`만 보며 진척도를 확인합니다.
+- **방향 제시**: 목표를 말하면 AI가 문서를 작성합니다.
+- **승인 (Merge)**: AI가 작성한 코드와 문서를 검토하고 병합(Merge)합니다.
+
+### 🤖 AI (The Worker)
+- **관리 주체 (Read-Write)**: `.good-partner/` 폴더는 AI의 영토입니다.
+- **자동 문서화**: AI가 태스크 티켓 생성, 칸반 업데이트, 로그 작성을 **알아서** 수행합니다.
+- **충돌 해결**: 깃(Git) 브랜치 병합 시 발생하는 문서 충돌도 AI가 내용을 읽고 지능적으로 합칩니다.
+
 ## 🚀 빠른 시작
 
-### 1. 프로젝트 초기화
+### 1. 초기화
 ```bash
 good-partner init
 ```
-이 명령어는 프로젝트 루트에 **`good-partner/`** 폴더를 생성합니다.
-내부에는 `kanban.md`(현황판), `specs/`(요구사항), `work/`(작업공간)가 포함됩니다.
+AI가 관리할 `.good-partner` 작업 공간을 생성합니다.
 
-### 2. 팀원 등록
+### 2. 등록
 ```bash
 good-partner register "Junghwan"
 ```
-자신을 `good-partner/team.yaml`에 등록합니다.
 
-### 3. 협업 방법
-1.  **칸반 확인**: `good-partner/kanban.md` 파일을 엽니다.
-2.  **작업 선택**: 할 일을 **IN PROGRESS**로 옮깁니다.
-3.  **코딩 및 로그**: AI는 자동으로 `specs/`를 읽고 코딩하며, 진행상황을 `logs/`에 기록합니다.
+### 3. AI에게 지시하기
+Cursor나 Claude에게 이렇게 말만 하세요:
+> "칸반 확인해서 다음 작업 시작해."
+
+그러면 AI는:
+1.  `.good-partner/kanban.md`를 읽고,
+2.  스스로 할 일을 **진행 중(IN PROGRESS)**으로 옮긴 뒤,
+3.  코딩과 문서화를 동시에 수행합니다.
 
 ### 3. AI 준비 시키기 (Prompt)
 ChatGPT 웹 인터페이스 등에서 새 대화를 시작할 때, 아래 명령어를 사용하세요:

@@ -1,36 +1,33 @@
-# AGENTS.md: The Map of Skills
+# AGENTS HANDBOOK
 
-**Attention AI Agent:**
-You are operating within a **Good Partner** project. This file is your map to understanding this environment.
+**PROTOCOL VERSION**: 1.2.0 (AI-Managed)
+**LANGUAGE_ENFORCEMENT**: Check `.good-partner/config.json`
 
-## 1. Core Directive
-Your primary goal is to **maintain context** through documentation.
-- **NEVER** write code without a corresponding Task (T-xxxx) in `work/`.
-- **ALWAYS** update the Task document with your progress.
-- **ALWAYS** log your "Chain of Thought" in `sessions/` if you are performing complex reasoning.
+## 🧠 THE CORE PHILOSOPHY
+**Humans Lead, AI Works.**
+- **Human Role**: Defines goals, Reviews Kanban, Merges PRs.
+- **AI Role**: Writes Specs, Updates Tasks, Writes Code, Maintains `.good-partner/`.
 
-## 2. The Map (Where things are)
+## 📂 DIRECTORY MAP (YOUR TERRITORY)
+All context lives in **`.good-partner/`**. You must maintain this folder.
 
-| Path | Purpose | Action Required |
+| Directory | Purpose | AI Action |
 | :--- | :--- | :--- |
-| `PROTOCOL.md` | The Laws | **READ FIRST**. Follow naming conventions strictly. |
-| `projects/<slug>/` | Project Workspace | Your code lives here. |
-| `work/` | Tasks (T-xxxx) | **Create/Update** these to track work. |
-| `phases/` | Epics (PH-xxxx) | Read these to understand high-level goals. |
-| `registry/people.yaml` | Team List | Register yourself here if not present. |
-| `adapters/` | Skills Sources | Source code for tool adapters (Codex, Claude, etc). |
+| \`kanban.md\` | **Single Source of Truth** | **READ** first. **UPDATE** status (Todo -> Progress -> Done). |
+| \`specs/\` | Requirements & Decisions | **READ** for context. **WRITE** if clarifying reqs. |
+| \`work/\` | Active Task Tickets | **CREATE** T-xxxx.md. **UPDATE** constantly while working. |
+| \`logs/\` | Sessions & Handoffs | **APPEND** logs every session. |
+| \`team.yaml\` | Team Registry | Read-only. |
 
-## 3. How to Use Skills
-If you need to install a specific capability (e.g., for Codex to understand this repo), use the CLI:
-`good-partner skill codex`
+## 🛠️ MERGE & CONFLICT PROTOCOL
+If you encounter git merge conflicts in `.good-partner/`:
+1. **Analyze**: Read both versions of the document.
+2. **Synthesize**: Combine the "Todo" items from both.
+3. **Resolve**: Rewrite the file with the unified state.
+*Do not ask the human to resolve documentation conflicts. That is your job.*
 
-## 4. Language Enforcement
-Check `.good-partner-rc.json` for the required language (`ko`, `en`, `zh`).
-If `language: "ko"`, ALL documentation (Tasks, Decisions, Handoffs) MUST be written in Korean.
-
-## 5. Your Workflow (The Loop)
-1. **Read**: `phases/` and active `work/` tasks.
-2. **Plan**: Create a new `work/T-xxxx.md` if starting new work.
-3. **Execute**: Write code.
-4. **Document**: Update `work/T-xxxx.md` with "Progress".
-5. **Handoff**: If stopping, create `handoffs/H-xxxx.md`.
+## 🚀 YOUR WORK LOOP
+1. **Read Kanban**: Find what is assigned or high priority.
+2. **Plan**: If no Task exists, create `work/T-xxxx.md` based on `specs/`.
+3. **Act**: Write code in the actual project.
+4. **Report**: Update `kanban.md` and `work/T-xxxx.md` before finishing response.

@@ -25,8 +25,8 @@ Good Partner solves this by enforcing a **Documentation-First** agile workflow t
 
 ## ✨ Key Features
 
-- **📂 Spec-Kit Structure**: All artifacts live in a clean **`good-partner/`** directory. No root clutter.
-- **📋 Kanban-Driven**: `good-partner/kanban.md` is the single source of truth for AI and Humans.
+- **📂 Clean & Powerful**: All artifacts are tucked away in **`.good-partner/`**, leaving your root clean.
+- **📋 Kanban-Driven**: `.good-partner/kanban.md` is the single source of truth for AI and Humans.
 - **🚀 Agile Workflow Automation**: "Spec -> Task -> Code" flow is enforced via the file system.
 - **🔌 Universal Skill Injection**: Inject this protocol into **Codex**, **Claude**, or **Gemini**.
 - **🗣️ Language Enforcement**: Enforce documentation in any language (English, Korean, Chinese).
@@ -41,25 +41,42 @@ npm install -g @junghwan030602/good-partner
 good-partner --version
 ```
 
+## 🤝 Collaboration Philosophy: "Human Leads, AI Works"
+
+In **Good Partner**, the roles are strictly divided:
+
+### 🧑‍💻 Human (The Manager)
+- **Read-Only**: You generally just read `.good-partner/kanban.md` to see progress.
+- **Direction**: You define the goals in `specs/` (or ask AI to draft them).
+- **Merge**: You accept Pull Requests managed by AI.
+
+### 🤖 AI (The Worker)
+- **Read-Write**: AI owns the `.good-partner/` folder.
+- **Auto-Documentation**: AI creates tickets, updates Kanban, and logs work *automatically*.
+- **Conflict Resolver**: When merging branches, **AI resolves documentation conflicts** by merging Kanban items intelligently.
+
 ## 🚀 Quick Start
 
-### 1. Initialize a Project
+### 1. Initialize
 ```bash
 good-partner init
 ```
-This simply creates a **`good-partner/`** folder in your repository.
-It includes a `kanban.md` board, `specs/` for requirements, and `work/` for active tasks.
+Creates the hidden `.good-partner` workspace managed by AI.
 
 ### 2. Register
 ```bash
 good-partner register "Junghwan"
 ```
-This adds you to `good-partner/team.yaml`.
 
-### 3. How to Collaborate
-1.  **Check Kanban**: Open `good-partner/kanban.md`.
-2.  **Pick a Task**: Move an item to **IN PROGRESS**.
-3.  **Code & Log**: AI will automatically read your `specs/` and log progress in `logs/`.
+### 3. Let AI Work
+Just give a high-level command to your AI (Cursor/Claude):
+> "Check the Kanban and start the next feature."
+
+The AI will:
+1.  Read `.good-partner/kanban.md`.
+2.  Move a task to **IN PROGRESS**.
+3.  Write code & Update documentation simultaneously.
+
 
 ### 4. Prime Your AI
 If you are starting a chat session with an LLM (e.g., ChatGPT web interface):
